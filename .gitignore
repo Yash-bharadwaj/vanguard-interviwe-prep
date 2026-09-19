@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+# personal source documents: not published
+Yashwanth_Resume_vanguard*.pdf
+WhatsApp Image*.jpeg
+prompt.md

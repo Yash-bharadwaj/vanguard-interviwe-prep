@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: ui-sans-serif, -apple-system, "Segoe UI", Inter, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --color-bg: #fafafa;
+  --color-fg: #18181b;
+  --color-muted: #71717a;
+  --color-line: #e4e4e7;
+  --color-card: #ffffff;
+  --color-soft: #f4f4f5;
+  --color-accent: #18181b;
+  --color-accent-fg: #fafafa;
+  --color-hi: #dc2626;
+  --color-med: #d97706;
+  --color-lo: #71717a;
+  --color-ok: #059669;
+  --color-warn: #b45309;
+}
+.dark {
+  --color-bg: #0b0b0d;
+  --color-fg: #ececef;
+  --color-muted: #9a9aa3;
+  --color-line: #26262b;
+  --color-card: #111114;
+  --color-soft: #18181c;
+  --color-accent: #ececef;
+  --color-accent-fg: #0b0b0d;
+  --color-hi: #f87171;
+  --color-med: #fbbf24;
+  --color-lo: #9a9aa3;
+  --color-ok: #34d399;
+  --color-warn: #fbbf24;
+}
+html, body, #root { height: 100%; }
+body { background: var(--color-bg); color: var(--color-fg); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+* { border-color: var(--color-line); }
+pre, code { font-family: var(--font-mono); }
+pre { overflow-x: auto; max-width: 100%; }
+.prose-p p { margin: 0 0 .6rem; line-height: 1.65; }
+::selection { background: color-mix(in srgb, var(--color-fg) 15%, transparent); }
+
+@layer base {
+  /* implicit grid tracks otherwise grow to max-content and cause horizontal overflow on phones */
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  select { max-width: 100%; }
+  #main, [role=dialog] { overflow-wrap: anywhere; }
+}
