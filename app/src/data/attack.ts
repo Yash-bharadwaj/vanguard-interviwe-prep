@@ -62,7 +62,7 @@ export const CHAINS: Chain[] = [
     { ask: "Blue-green vs canary?", say: "Blue-green flips all traffic between two environments; canary shifts a small percentage first to catch problems early." },
     { ask: "What did you own?", say: "The frontend build steps. DevOps owned the pipeline infrastructure." } ] },
   { id: "debug", topic: "Production debugging", anchor: "Anchor 5", turns: [
-    { ask: "Tell me about a production issue.", say: "[Use a verified incident.] I'll describe impact, the layer-by-layer trace, the root cause, the fix and the prevention." },
+    { ask: "Tell me about a production issue.", say: "A typical one: an automation job starts failing. I check the impact, what changed, then follow one failing run through logs and dashboards to the root cause, fix it, and add a check and an alert so it's caught earlier." },
     { ask: "How did you find the root cause?", say: "I followed one failing request through the browser, the API, the function logs and the data, using a request ID." },
     { ask: "How did you make sure it wouldn't happen again?", say: "A test or alert, and an update to the playbook." },
     { ask: "Rollback or fix-forward?", say: "Rollback first if the last release is the likely cause and impact is high." } ] },

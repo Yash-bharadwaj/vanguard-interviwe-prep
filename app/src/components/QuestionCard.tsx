@@ -3,6 +3,7 @@ import { AlertTriangle, Bookmark, Check, Flag, PenLine, StickyNote } from "lucid
 import type { Q } from "@/data/types";
 import { KITS, byN, priorityOf, whyFor, drillFor, CAT_LABEL, STAGES } from "@/data/bank";
 import { WHY_SAY } from "@/data/spoken";
+import { UPDATED } from "@/data/updated";
 import { JD } from "@/data/jd";
 import { conflictById } from "@/data/conflicts";
 import { Badge, Button, Section, Label, Textarea } from "@/components/ui/primitives";
@@ -18,6 +19,10 @@ export const PriBadge = ({ q }: { q: Q }) => {
 export const StatusPill = ({ id }: { id: string }) => {
   const s = useProgress((x) => x.status[id] ?? "not-started"); const cycle = useProgress((x) => x.cycle);
   return <button onClick={(e) => { e.stopPropagation(); cycle(id); }} className="cursor-pointer"><Badge tone={s === "confident" ? "ok" : s === "practiced" ? "solid" : s === "learning" ? "med" : "neutral"}>{STATUS_LABEL[s]}</Badge></button>;
+};
+const Updated = ({ id }: { id: string }) => {
+  const u = UPDATED[id]; if (!u) return null;
+  return <div className="mb-3 rounded-md border border-ok/40 bg-ok/5 p-3"><Label tone="ok">Updated for Vanguard · Uber is current — say this</Label><Para>{u.say}</Para>{u.note && <p className="mt-1 text-xs text-warn">{u.note}</p>}<p className="mt-2 text-xs text-muted">The original bank wording below is outdated (EY / BluSapphire-as-current).</p></div>;
 };
 const Para = ({ children }: { children: React.ReactNode }) => <p className="whitespace-pre-line leading-relaxed">{children}</p>;
 
@@ -73,6 +78,7 @@ export function QuestionCard({ q, onOpen }: { q: Q; onOpen?: (n: number) => void
         <div className="h-2" /><Label>Interviewer background (inferred from his profile — not certain)</Label><div className="flex flex-wrap gap-1">{q.iv.length ? q.iv.map((j) => <Badge key={j}>{j}</Badge>) : <span className="text-muted">—</span>}</div>
       </Section>
 
+      {UPDATED[q.id] && <Updated id={q.id} />}
       <Section defaultOpen title="My 30-second answer" tone="ok">
         {kit ? <Para>{kit.s30}</Para> : <><Para>{q.short30}</Para><p className="mt-2 text-xs text-warn">Auto-extracted opening of your original bank answer. Re-say it in your own words, in short spoken sentences.</p></>}
       </Section>
@@ -100,8 +106,8 @@ export function QuestionCard({ q, onOpen }: { q: Q; onOpen?: (n: number) => void
         <div className="space-y-2">
           {kit?.follows.map((f, i) => <div key={"k" + i} className="rounded-md border border-ok/30 bg-ok/5 p-3"><div className="font-medium">↳ {f.q}</div><Para>{f.a}</Para></div>)}
           {q.fu.map((f) => (
-            <Section key={f.id} title={<span>Follow-up {f.n}: {f.q}</span>} badge={<>{f.ey && <Badge tone="warn">EY</Badge>}<ConflictChips ids={f.conflicts.slice(0, 1)} /></>}>
-              <Para>{f.a}</Para>{f.claims.length > 0 && <p className="mt-2 text-xs text-warn">Needs verification: {f.claims.join(", ")}</p>}
+            <Section key={f.id} title={<span>Follow-up {f.n}: {f.q}</span>} badge={<>{UPDATED[f.id] && <Badge tone="ok">updated answer</Badge>}{f.ey && <Badge tone="warn">EY</Badge>}<ConflictChips ids={f.conflicts.slice(0, 1)} /></>}>
+              <Updated id={f.id} /><Para>{f.a}</Para>{f.claims.length > 0 && <p className="mt-2 text-xs text-warn">Needs verification: {f.claims.join(", ")}</p>}
             </Section>
           ))}
         </div>

@@ -1,12 +1,12 @@
 export interface Conflict { id: string; title: string; a: string; b: string; risk: string; say: string; verify: string; severity: "high" | "medium" | "low" }
 /** Every conflict is shown, never silently reconciled. */
 export const CONFLICTS: Conflict[] = [
-  { id: "C-CURRENT", severity: "high", title: "Which employer is 'current'? (Uber vs BluSapphire)",
-    a: "RESUME: Automation Engineer, Uber, Hyderabad — May 2026 – Present. BluSapphire is Mar 2024 – May 2026.",
+  { id: "C-CURRENT", severity: "high", title: "Uber is current; the question bank still speaks as BluSapphire (dates CONFIRMED by you)",
+    a: "CONFIRMED BY YOU + RESUME: Automation Engineer at Uber since 21 May 2026 (current). BluSapphire: March 2024 until 21 May 2026 (about 2 years 2 months).",
     b: "QUESTION BANK: every answer speaks as if BluSapphire is the current job ('currently at BluSapphire', 'Why are you leaving your current company? … BluSapphire').",
-    risk: "You would be interviewing ~4 months after joining Uber. 'Why leaving Uber so soon?' is a very likely probe, and the bank has no answer for it. Also, if you say 'I'm currently at BluSapphire' it contradicts the resume the interviewer holds.",
-    say: "Anchor on what the resume says: 'I'm currently an Automation Engineer at Uber, working on internal tooling and API/data integration. Before that I spent about two years at BluSapphire on an EDR platform.' For 'why leave': give YOUR real reason in one calm sentence (growth toward full-stack/Java/backend ownership and product engineering is the safest true-sounding theme IF it is true for you), never criticise Uber.",
-    verify: "Write your real reason for leaving Uber so soon. This app cannot invent it." },
+    risk: "The dates are settled, but the bank answers are wrong about the present. By 22 Sep you will have been at Uber about four months, so 'why are you leaving so soon?' is a very likely probe, and the bank has no answer for it.",
+    say: "'I'm an Automation Engineer at Uber, where I joined on 21 May, building internal tooling and API and data integrations. Before that I spent just over two years at BluSapphire, from March 2024, on an EDR platform.' For 'why leave': give YOUR real reason in one calm sentence, never criticise Uber.",
+    verify: "Write your real reason for looking to move after four months. This app cannot invent it." },
   { id: "C-EY", severity: "high", title: "Question bank is written for EY, interview is Vanguard",
     a: "QUESTION BANK: 'Why EY?', 'consulting model', 'different clients every few months', 'EY's engineering culture'.",
     b: "YOUR INTERVIEW: Vanguard India (Hyderabad), Application Engineer II.",

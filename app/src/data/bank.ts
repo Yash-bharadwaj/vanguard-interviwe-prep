@@ -8,7 +8,9 @@ import { ONE_DAY } from "./plan45";
 import { WHY } from "./why";
 import { AWS } from "./study";
 
-export const BANK = raw as unknown as Q[];
+/** The question file was written for EY; everything displayed reads as Vanguard. bank.json (verbatim source) is untouched. */
+export const vg = (t: string) => t.replace(/\bEY(’s|'s)?/g, (_m, p) => (p ? "Vanguard's" : "Vanguard"));
+export const BANK: Q[] = (raw as unknown as Q[]).map((q) => ({ ...q, q: vg(q.q), a: vg(q.a), fu: q.fu.map((f) => ({ ...f, q: vg(f.q), a: vg(f.a) })) }));
 export const KITS: Record<number, Kit> = Object.fromEntries([...KITS_A, ...KITS_B, ...KITS_C].map((k) => [k.n, k]));
 export const TOP_SET = new Set<number>(ONE_DAY.questions);
 export const byN = new Map(BANK.map((q) => [q.n, q]));
